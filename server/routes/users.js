@@ -59,8 +59,8 @@ router.put(
 router.delete(
   "/:id",
   asyncHandler(async (req, res) => {
-    await User.findOneAndDelete(req.params.id);
-    res.status(200).send("User deleted successfully");
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json("User deleted successfully");
   })
 );
 
