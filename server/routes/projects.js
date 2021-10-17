@@ -10,10 +10,16 @@ const authenToken = require("../middleware/authToken");
 
 router.post(
   "/",
-  validate(projectValidator),
+  [authenToken, validate(projectValidator)],
   asyncHandler(async (req, res) => {
-    await Project(req.body).save();
-    res.status(200).send("Project was created successfully.");
+    const userid = req.user.id;
+    const projectName = req.body.project_name;
+    const project = new Project({
+      UserId: userid,
+      project_name: projectName,
+    });
+    const createdProject = await project.save();
+    res.status(200).json(createdProject);
   })
 );
 
