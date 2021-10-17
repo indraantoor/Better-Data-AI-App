@@ -10,7 +10,7 @@ const authenToken = require("../middleware/authToken");
 
 router.post(
   "/",
-  authenToken,
+  [authenToken, validate(modelValidator)],
   asyncHandler(async (req, res) => {
     const userId = req.user.id;
     const projectId = req.body.Project_id;
@@ -37,8 +37,12 @@ router.post(
 // Get all Models
 router.get(
   "/",
+  authenToken,
   asyncHandler(async (req, res) => {
-    const models = await Model.find();
+    const projectId = req.body.Project_id;
+    const models = await Model.find({ Project_id: projectId }).populate(
+      "Project_id"
+    );
     res.send(models);
   })
 );

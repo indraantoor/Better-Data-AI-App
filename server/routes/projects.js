@@ -29,7 +29,7 @@ router.get(
   authenToken,
   asyncHandler(async (req, res) => {
     const userid = req.user.id;
-    const projects = await Project.find({ UserId: userid });
+    const projects = await Project.find({ UserId: userid }).populate("UserId");
     res.send(projects);
     // res.json({ userid: userid });
   })

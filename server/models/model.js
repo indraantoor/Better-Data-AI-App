@@ -39,6 +39,8 @@ const Model = mongoose.model("models", modelSchema);
 const modelValidator = (data) => {
   const schema = Joi.object({
     model_name: Joi.string().required(),
+    Project_id: Joi.string().required(),
+    parameters: Joi.object().required(),
   });
   return schema.validate(data);
 };
