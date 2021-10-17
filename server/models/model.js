@@ -16,10 +16,12 @@ const modelSchema = mongoose.Schema(
     User_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
+      required: true,
     },
     Project_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "projects",
+      required: true,
     },
     model_name: {
       type: String,
@@ -38,8 +40,9 @@ const Model = mongoose.model("models", modelSchema);
 
 const modelValidator = (data) => {
   const schema = Joi.object({
-    model_name: Joi.string().required(),
+    User_id: Joi.string().required(),
     Project_id: Joi.string().required(),
+    model_name: Joi.string().required(),
     parameters: Joi.object().required(),
   });
   return schema.validate(data);
