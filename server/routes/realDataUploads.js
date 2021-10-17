@@ -2,14 +2,15 @@ const express = require("express");
 const router = express.Router();
 const realDataCsvToDb = require("../utils/realDataCsvToDb");
 
+// Folder where real-data csv files will be stored
 const uploadsPath = "./uploads/real-data/";
-// const filePath = `./uploads/real-data/`;
 
-// UPLOAD
+// Gives the upload page for real data
 router.get("/", (req, res) => {
   res.sendFile(__dirname + "/realDataUpload.html");
 });
 
+// Handles upload of real data
 router.post("/", (req, res) => {
   if (req.files) {
     console.log(req.files);
@@ -20,7 +21,6 @@ router.post("/", (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        // const filePath = `./uploads/${filename}`;
         realDataCsvToDb(uploadsPath + filename);
         res.send("File Uploaded");
       }

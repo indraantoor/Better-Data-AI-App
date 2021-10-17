@@ -6,8 +6,7 @@ const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const authenToken = require("../middleware/authToken");
 
-// Create an Project
-
+// Create a Project
 router.post(
   "/",
   [authenToken, validate(projectValidator)],
@@ -31,6 +30,7 @@ router.get(
     const userid = req.user.id;
     const projects = await Project.find({ UserId: userid }).populate("UserId");
     res.send(projects);
+    // For Debugging Purposes
     // res.json({ userid: userid });
   })
 );

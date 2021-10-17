@@ -6,8 +6,7 @@ const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const authenToken = require("../middleware/authToken");
 
-// Create an Model
-
+// Create a Model
 router.post(
   "/",
   [authenToken, validate(modelValidator)],
@@ -27,10 +26,9 @@ router.post(
     });
     const createdModel = await model.save();
     res.status(200).json(createdModel);
-
+    // For Debugging Purposes
     // await Model(req.body).save();
     // res.status(200).send("Model was created successfully.");
-    // res.send(parameters);
   })
 );
 
