@@ -4,15 +4,33 @@ const { Model, modelValidator } = require("../models/model");
 const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
+const authenToken = require("../middleware/authToken");
 
 // Create an Model
 
 router.post(
   "/",
-  validate(modelValidator),
+  authenToken,
   asyncHandler(async (req, res) => {
-    await Model(req.body).save();
-    res.status(200).send("Model was created successfully.");
+    const userId = req.user.id;
+    const projectId = req.body.Project_id;
+    const modelName = req.body.model_name;
+    const parameters = req.body.parameters;
+    const model = new Model({
+      User_id: userId,
+      Project_id: projectId,
+      model_name: modelName,
+      parameters: {
+        batch_size: parameters.batch_size,
+        training_cycle: parameters.training_cycle,
+      },
+    });
+    const createdModel = await model.save();
+    res.status(200).json(createdModel);
+
+    // await Model(req.body).save();
+    // res.status(200).send("Model was created successfully.");
+    // res.send(parameters);
   })
 );
 
