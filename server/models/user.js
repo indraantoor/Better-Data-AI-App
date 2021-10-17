@@ -45,6 +45,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -56,6 +60,7 @@ const User = mongoose.model("users", userSchema);
 const validator = (data) => {
   const schema = Joi.object({
     username: Joi.string().required(),
+    email: Joi.string().required(),
   });
   return schema.validate(data);
 };

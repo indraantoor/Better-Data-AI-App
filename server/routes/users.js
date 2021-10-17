@@ -4,15 +4,19 @@ const { User, validator } = require("../models/user");
 const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
-
+const jwt = require("jsonwebtoken");
 // Create an User
 
 router.post(
   "/",
   validate(validator),
   asyncHandler(async (req, res) => {
+    // const accessToken = jwt.sign(user, process.env.JWT_SECRET);
     await User(req.body).save();
-    res.status(200).send("User was created successfully.");
+    res
+      .status(200)
+      // .json({ accessToken: accessToken })
+      .send("User was created successfully.");
   })
 );
 
@@ -20,8 +24,14 @@ router.post(
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const users = await User.find();
-    res.send(users);
+    const { email } = req.body;
+    // const users = await User.find();
+    const users = await User.findOne({ email });
+    const id = users._id;
+    const accessToken = jwt.sign({ id }, process.env.JWT_SECRET);
+    // res.send(users);
+    res.status(200).json({ accessToken: accessToken });
+    // res.send(id);
   })
 );
 

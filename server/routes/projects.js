@@ -4,6 +4,7 @@ const { Project, projectValidator } = require("../models/project");
 const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
+const authenToken = require("../middleware/authToken");
 
 // Create an Project
 
@@ -19,6 +20,7 @@ router.post(
 // Get all Projects
 router.get(
   "/",
+  authenToken,
   asyncHandler(async (req, res) => {
     const projects = await Project.find();
     res.send(projects);
