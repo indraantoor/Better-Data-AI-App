@@ -2,9 +2,9 @@ const csvtojson = require("csvtojson");
 const syntheticData = require("../models/syntheticData");
 
 // CONVERT TO CSV
-const csvfilepath = "myfile.csv";
+const csvfilepath = "./utils/myfile.csv";
 
-function csvToDb() {
+function syntheticDataCsvToDb() {
   csvtojson()
     .fromFile(csvfilepath)
     .then((json) => {
@@ -23,4 +23,4 @@ function csvToDb() {
     });
 }
 
-module.exports = csvToDb;
+module.exports = syntheticDataCsvToDb;

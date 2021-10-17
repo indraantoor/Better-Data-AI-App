@@ -6,28 +6,7 @@ const connection = require("./db");
 const users = require("./routes/users");
 const projects = require("./routes/projects");
 const models = require("./routes/models");
-const csvtojson = require("csvtojson");
-const syntheticData = require("./models/syntheticData");
-
-// CONVERT TO CSV
-const csvfilepath = "myfile.csv";
-
-csvtojson()
-  .fromFile(csvfilepath)
-  .then((json) => {
-    // console.log(json);
-    // fs.writeFileSync("output.json", JSON.stringify(json), "utf-8", (err) => {
-    //   if (err) console.log(err);
-    // });
-
-    syntheticData.insertMany({ data: json }, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("ok");
-      }
-    });
-  });
+const fs = require("fs");
 
 // Database Connection
 connection();
