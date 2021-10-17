@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-// TODO:  Add joi validation
-// TODO: filename make it required true
+// TODO:  Test Joi Validation
+// TODO Take care of joi validation exports
 
 const realDataValuesSchema = mongoose.Schema(
   {
@@ -36,7 +36,10 @@ const realDataValuesSchema = mongoose.Schema(
 const realDataSchema = mongoose.Schema(
   {
     data: [realDataValuesSchema],
-    filename: String,
+    filename: {
+      type: String,
+      required: true,
+    },
     User_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
@@ -57,6 +60,17 @@ const realDataSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+const realDataValidator = (data) => {
+  const schema = Joi.object({
+    filename: Joi.string().required(),
+    User_id: Joi.string().required(),
+    Project_id: Joi.string().required(),
+    Model_id: Joi.string().required(),
+    data: Joi.array().required(),
+  });
+  return schema.validate(data);
+};
 
 const RealData = mongoose.model("realData", realDataSchema);
 module.exports = RealData;

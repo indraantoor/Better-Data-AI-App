@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-// TODO: add project and user ownership details to schema
-// TODO: (Optional) - Add joi validation and schema validation
-// TODO: filname make it required true
+// TODO:  Test Joi Validation
+// TODO Take care of joi validation exports
 
 const syntheticDataValuesSchema = mongoose.Schema(
   {
@@ -37,27 +36,41 @@ const syntheticDataValuesSchema = mongoose.Schema(
 const syntheticDataSchema = mongoose.Schema(
   {
     data: [syntheticDataValuesSchema],
-    filename: String,
+    filename: {
+      type: String,
+      required: true,
+    },
     User_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
-      // required: true,
+      required: true,
     },
     Project_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "projects",
-      // required: true,
+      required: true,
     },
     Model_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "models",
-      // required: true,
+      required: true,
     },
   },
   {
     timestamps: true,
   }
 );
+
+const syntheticDataValidator = (data) => {
+  const schema = Joi.object({
+    filename: Joi.string().required(),
+    User_id: Joi.string().required(),
+    Project_id: Joi.string().required(),
+    Model_id: Joi.string().required(),
+    data: Joi.array().required(),
+  });
+  return schema.validate(data);
+};
 
 const SyntheticData = mongoose.model("syntheticData", syntheticDataSchema);
 module.exports = SyntheticData;
