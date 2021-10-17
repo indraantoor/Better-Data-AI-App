@@ -6,7 +6,6 @@ const connection = require("./db");
 const users = require("./routes/users");
 const projects = require("./routes/projects");
 const models = require("./routes/models");
-const fs = require("fs");
 const upload = require("express-fileupload");
 const realDataUploads = require("./routes/realDataUploads");
 const syntheticDataUploads = require("./routes/syntheticDataUploads");
@@ -14,18 +13,18 @@ const syntheticDataUploads = require("./routes/syntheticDataUploads");
 // Database Connection
 connection();
 
-// MIDDLEWARES
+// Middlewares
 app.use(express.json());
 app.use(cors());
 app.use(upload());
 
-// ROUTES
+// Routes
 app.use("/api/users", users);
 app.use("/api/projects", projects);
 app.use("/api/models", models);
 app.use("/api/realdata/upload", realDataUploads);
 app.use("/api/syntheticdata/upload", syntheticDataUploads);
 
-// LISTENING ON - PORT
+// Port Information
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}`));
