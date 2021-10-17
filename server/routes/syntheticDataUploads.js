@@ -13,15 +13,16 @@ router.get("/", (req, res) => {
 // Handles upload of real data
 router.post("/", (req, res) => {
   if (req.files) {
-    console.log(req.files);
     var file = req.files.file;
     var filename = file.name;
-    console.log(filename);
+    console.log(`Uploading Synthetic Data File: ${filename}`);
     file.mv(uploadsPath + filename, function (err) {
       if (err) {
+        console.log(`Error Occured While Uploading File: ${filename}`);
         res.send(err);
       } else {
         syntheticDataCsvToDb(uploadsPath + filename);
+        console.log(`Uploaded Synthetic Data File: ${filename}`);
         res.send("File Uploaded");
       }
     });
