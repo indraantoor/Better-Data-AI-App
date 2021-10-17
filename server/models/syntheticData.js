@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const test = mongoose.Schema(
+const syntheticDataValuesSchema = mongoose.Schema(
   {
     CLIENTNUM: Number,
     Attrition_Flag: String,
@@ -31,7 +31,7 @@ const test = mongoose.Schema(
 );
 
 const syntheticDataSchema = mongoose.Schema({
-  data: [test],
+  data: [syntheticDataValuesSchema],
 });
 
 const SyntheticData = mongoose.model("syntheticData", syntheticDataSchema);
