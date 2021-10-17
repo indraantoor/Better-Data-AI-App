@@ -21,6 +21,9 @@ router.post("/", (req, res) => {
         console.log(`Error Occured While Uploading File: ${filename}`);
         res.send(err);
       } else {
+        console.log(
+          `Started Parsing And Inserting Into Database File: ${filename}`
+        );
         syntheticDataCsvToDb(uploadsPath + filename);
         console.log(`Uploaded Synthetic Data File: ${filename}`);
         res.send("File Uploaded");
