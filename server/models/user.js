@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
+const { Project } = require("./project");
 
 const parametersSchema = mongoose.Schema(
   {

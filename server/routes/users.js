@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { User, validator } = require("../models/user");
+const { Project, projectValidator } = require("../models/project");
+const { Model, modelValidator } = require("../models/model");
 const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 // Create an User
 
 router.post(
@@ -59,7 +62,14 @@ router.put(
 router.delete(
   "/:id",
   asyncHandler(async (req, res) => {
-    await User.findByIdAndDelete(req.params.id);
+    const objectIdConverted = mongoose.Types.ObjectId(req.params.id);
+    await Project.deleteMany({
+      UserId: mongoose.Types.ObjectId(objectIdConverted),
+    });
+    await Model.deleteMany({
+      User_id: mongoose.Types.ObjectId(objectIdConverted),
+    });
+    // await User.findByIdAndDelete(req.params.id);
     res.status(200).json("User deleted successfully");
   })
 );
