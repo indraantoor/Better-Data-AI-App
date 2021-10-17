@@ -2,9 +2,9 @@ const csvtojson = require("csvtojson");
 const realData = require("../models/realData");
 
 // CONVERT TO CSV
-const csvfilepath = "./utils/myfile.csv";
+// const csvfilepath = "./utils/myfile.csv";
 
-function realDataCsvToDb() {
+function realDataCsvToDb(csvfilepath) {
   csvtojson()
     .fromFile(csvfilepath)
     .then((json) => {

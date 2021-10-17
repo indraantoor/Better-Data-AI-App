@@ -8,6 +8,7 @@ const projects = require("./routes/projects");
 const models = require("./routes/models");
 const fs = require("fs");
 const upload = require("express-fileupload");
+const uploads = require("./routes/uploads");
 
 // Database Connection
 connection();
@@ -21,27 +22,7 @@ app.use(upload());
 app.use("/api/users", users);
 app.use("/api/projects", projects);
 app.use("/api/models", models);
-
-// UPLOAD
-app.get("/api/upload", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
-});
-
-app.post("/api/upload", (req, res) => {
-  if (req.files) {
-    console.log(req.files);
-    var file = req.files.file;
-    var filename = file.name;
-    console.log(filename);
-    file.mv("./uploads/" + filename, function (err) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send("File Uploaded");
-      }
-    });
-  }
-});
+app.use("/api/upload", uploads);
 
 // LISTENING ON - PORT
 const port = process.env.PORT || 8080;
