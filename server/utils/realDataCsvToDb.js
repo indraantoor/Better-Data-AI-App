@@ -11,7 +11,7 @@ function realDataCsvToDb(csvfilepath) {
         if (err) {
           console.log(err);
         } else {
-          console.log("ok");
+          console.log("Success: Inserted Data Of Real Data Into Database");
         }
       });
     });

@@ -11,7 +11,7 @@ function syntheticDataCsvToDb(csvfilepath) {
         if (err) {
           console.log(err);
         } else {
-          console.log("ok");
+          console.log("Success: Inserted Data Of Synthetic Data Into Database");
         }
       });
     });
