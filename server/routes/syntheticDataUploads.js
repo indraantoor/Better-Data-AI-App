@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const realDataCsvToDb = require("../utils/realDataCsvToDb");
+const syntheticDataCsvToDb = require("../utils/syntheticDataCsvToDb");
+
+const uploadsPath = "./uploads/synthetic-data/";
+// const filePath = `./uploads/real-data/`;
 
 // UPLOAD
 router.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/syntheticDataUpload.html");
 });
 
 router.post("/", (req, res) => {
@@ -13,12 +16,12 @@ router.post("/", (req, res) => {
     var file = req.files.file;
     var filename = file.name;
     console.log(filename);
-    file.mv("./uploads/" + filename, function (err) {
+    file.mv(uploadsPath + filename, function (err) {
       if (err) {
         res.send(err);
       } else {
-        const filePath = `./uploads/${filename}`;
-        realDataCsvToDb(filePath);
+        // const filePath = `./uploads/${filename}`;
+        syntheticDataCsvToDb(uploadsPath + filename);
         res.send("File Uploaded");
       }
     });

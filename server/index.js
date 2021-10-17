@@ -8,7 +8,8 @@ const projects = require("./routes/projects");
 const models = require("./routes/models");
 const fs = require("fs");
 const upload = require("express-fileupload");
-const uploads = require("./routes/uploads");
+const realDataUploads = require("./routes/realDataUploads");
+const syntheticDataUploads = require("./routes/syntheticDataUploads");
 
 // Database Connection
 connection();
@@ -22,7 +23,8 @@ app.use(upload());
 app.use("/api/users", users);
 app.use("/api/projects", projects);
 app.use("/api/models", models);
-app.use("/api/realdata/upload", uploads);
+app.use("/api/realdata/upload", realDataUploads);
+app.use("/api/syntheticdata/upload", syntheticDataUploads);
 
 // LISTENING ON - PORT
 const port = process.env.PORT || 8080;

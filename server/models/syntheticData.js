@@ -30,9 +30,14 @@ const syntheticDataValuesSchema = mongoose.Schema(
   }
 );
 
-const syntheticDataSchema = mongoose.Schema({
-  data: [syntheticDataValuesSchema],
-});
+const syntheticDataSchema = mongoose.Schema(
+  {
+    data: [syntheticDataValuesSchema],
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const SyntheticData = mongoose.model("syntheticData", syntheticDataSchema);
 module.exports = SyntheticData;
