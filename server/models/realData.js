@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-// TODO: add project and user ownership details to schema
-// TODO: (Optional) - Add joi validation and schema validation
+// TODO:  Add joi validation
 
 const realDataValuesSchema = mongoose.Schema(
   {
@@ -36,6 +35,22 @@ const realDataValuesSchema = mongoose.Schema(
 const realDataSchema = mongoose.Schema(
   {
     data: [realDataValuesSchema],
+    filename: String,
+    User_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: true,
+    },
+    Project_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "projects",
+      required: true,
+    },
+    Model_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "models",
+      required: true,
+    },
   },
   {
     timestamps: true,

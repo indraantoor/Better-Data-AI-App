@@ -15,7 +15,9 @@ router.post("/", (req, res) => {
   if (req.files) {
     var file = req.files.file;
     var filename = file.name;
+
     console.log(`Info: Uploading Synthetic Data File: ${filename}`);
+
     file.mv(uploadsPath + filename, function (err) {
       if (err) {
         console.log(`Error: Error Occured While Uploading File: ${filename}`);
