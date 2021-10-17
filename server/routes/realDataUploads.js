@@ -15,17 +15,17 @@ router.post("/", (req, res) => {
   if (req.files) {
     var file = req.files.file;
     var filename = file.name;
-    console.log(`Uploading Real Data File: ${filename}`);
+    console.log(`Info: Uploading Real Data File: ${filename}`);
     file.mv(uploadsPath + filename, function (err) {
       if (err) {
-        console.log(`Error Occured While Uploading File: ${filename}`);
+        console.log(`Error: Error Occured While Uploading File: ${filename}`);
         res.send(err);
       } else {
         console.log(
-          `Started Parsing And Inserting Into Database File: ${filename}`
+          `Info: Started Parsing And Inserting Into Database File: ${filename}`
         );
         realDataCsvToDb(uploadsPath + filename);
-        console.log(`Uploaded Real Data File: ${filename}`);
+        console.log(`Info: Uploaded Real Data File: ${filename}`);
         res.send("File Uploaded");
       }
     });
