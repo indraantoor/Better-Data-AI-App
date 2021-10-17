@@ -22,7 +22,7 @@ app.use(upload());
 app.use("/api/users", users);
 app.use("/api/projects", projects);
 app.use("/api/models", models);
-app.use("/api/upload", uploads);
+app.use("/api/realdata/upload", uploads);
 
 // LISTENING ON - PORT
 const port = process.env.PORT || 8080;
