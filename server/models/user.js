@@ -1,44 +1,5 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const { Project } = require("./project");
-
-const parametersSchema = mongoose.Schema(
-  {
-    batch_size: Number,
-    training_cycle: Number,
-  },
-  {
-    timestamps: true,
-  }
-);
-
-const modelSchema = mongoose.Schema(
-  {
-    model_name: String,
-    parameters: {
-      type: parametersSchema,
-    },
-    synthetic_data: String,
-  },
-  {
-    timestamps: true,
-  }
-);
-
-const projectSchema = mongoose.Schema(
-  {
-    project_name: String,
-    real_data: String,
-    models: [modelSchema],
-  },
-  {
-    timestamps: true,
-  }
-);
-
-const testSchema = mongoose.Schema({
-  myname: String,
-});
 
 const userSchema = mongoose.Schema(
   {

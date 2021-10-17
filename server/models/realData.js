@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
+// TODO: add project and user ownership details to schema
+// TODO: (Optional) - Add joi validation
+
 const realDataValuesSchema = mongoose.Schema(
   {
     CLIENTNUM: Number,
