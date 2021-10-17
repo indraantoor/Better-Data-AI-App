@@ -1,19 +1,27 @@
 const csvtojson = require("csvtojson");
 const syntheticData = require("../models/syntheticData");
 
-// Synthetic Data Csv to mongodb
+// Insert into database
+function insertdata(json, params) {
+  const syntheticDataObj = new syntheticData({
+    ...params,
+    data: json,
+  });
+  syntheticData.insertMany(syntheticDataObj, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Success: Inserted Data Of Real Data Into Database");
+    }
+  });
+}
 
-function syntheticDataCsvToDb(csvfilepath) {
+// Convert Csv to json
+function syntheticDataCsvToDb(csvfilepath, params) {
   csvtojson()
     .fromFile(csvfilepath)
     .then((json) => {
-      syntheticData.insertMany({ data: json }, (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Success: Inserted Data Of Synthetic Data Into Database");
-        }
-      });
+      insertdata(json, params);
     });
 }
 

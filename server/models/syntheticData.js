@@ -3,6 +3,7 @@ const Joi = require("joi");
 
 // TODO: add project and user ownership details to schema
 // TODO: (Optional) - Add joi validation and schema validation
+// TODO: filname make it required true
 
 const syntheticDataValuesSchema = mongoose.Schema(
   {
@@ -36,6 +37,22 @@ const syntheticDataValuesSchema = mongoose.Schema(
 const syntheticDataSchema = mongoose.Schema(
   {
     data: [syntheticDataValuesSchema],
+    filename: String,
+    User_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      // required: true,
+    },
+    Project_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "projects",
+      // required: true,
+    },
+    Model_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "models",
+      // required: true,
+    },
   },
   {
     timestamps: true,
