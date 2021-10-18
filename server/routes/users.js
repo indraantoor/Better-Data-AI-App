@@ -9,7 +9,10 @@ const asyncHandler = require("../middleware/asyncHandler");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const { RealData, realDataValidator } = require("../models/realData");
-const SyntheticData = require("../models/syntheticData");
+const {
+  SyntheticData,
+  syntheticDataValidator,
+} = require("../models/syntheticData");
 
 // Create a User
 router.post(

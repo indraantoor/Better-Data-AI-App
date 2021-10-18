@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 // TODO:  Test Joi Validation
-// TODO Take care of joi validation exports
 
 const syntheticDataValuesSchema = mongoose.Schema(
   {
@@ -73,4 +72,4 @@ const syntheticDataValidator = (data) => {
 };
 
 const SyntheticData = mongoose.model("syntheticData", syntheticDataSchema);
-module.exports = SyntheticData;
+module.exports = { SyntheticData, syntheticDataValidator };

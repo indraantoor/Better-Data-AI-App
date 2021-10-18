@@ -5,6 +5,10 @@ const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const authenToken = require("../middleware/authToken");
+const {
+  SyntheticData,
+  syntheticDataValidator,
+} = require("../models/syntheticData");
 const mongoose = require("mongoose");
 
 // Create a Model

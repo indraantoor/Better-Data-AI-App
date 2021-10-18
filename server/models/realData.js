@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 // TODO:  Test Joi Validation
-// TODO Take care of joi validation exports
 
 const realDataValuesSchema = mongoose.Schema(
   {

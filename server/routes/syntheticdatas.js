@@ -1,8 +1,10 @@
 const express = require("express");
 const asyncHandler = require("../middleware/asyncHandler");
 const router = express.Router();
-// const realData = require("../models/realData");
-const syntheticdata = require("../models/syntheticData");
+const {
+  syntheticdata,
+  syntheticDataValidator,
+} = require("../models/syntheticData");
 const authenToken = require("../middleware/authToken");
 
 // TODO: FIX NAMING

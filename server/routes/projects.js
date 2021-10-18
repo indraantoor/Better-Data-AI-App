@@ -7,7 +7,10 @@ const asyncHandler = require("../middleware/asyncHandler");
 const authenToken = require("../middleware/authToken");
 const { RealData, realDataValidator } = require("../models/realData");
 const { Model, modelValidator } = require("../models/model");
-const SyntheticData = require("../models/syntheticData");
+const {
+  SyntheticData,
+  syntheticDataValidator,
+} = require("../models/syntheticData");
 const mongoose = require("mongoose");
 
 // Create a Project

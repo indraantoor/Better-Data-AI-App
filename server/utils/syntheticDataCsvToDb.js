@@ -1,5 +1,8 @@
 const csvtojson = require("csvtojson");
-const syntheticData = require("../models/syntheticData");
+const {
+  syntheticData,
+  syntheticDataValidator,
+} = require("../models/syntheticData");
 
 // Insert into database
 function insertdata(json, params) {
