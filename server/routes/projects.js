@@ -8,6 +8,7 @@ const authenToken = require("../middleware/authToken");
 const RealData = require("../models/realData");
 const { Model, modelValidator } = require("../models/model");
 const SyntheticData = require("../models/syntheticData");
+const mongoose = require("mongoose");
 
 // Create a Project
 router.post(
@@ -52,8 +53,14 @@ router.get(
 router.put(
   "/:id",
   // [isValidObjectId, validate(projectValidator)],
-  isValidObjectId,
+  // isValidObjectId,
+  authenToken,
   asyncHandler(async (req, res) => {
+    const proj = await Project.findById(req.params.id);
+    if (proj.UserId.toString() !== req.user.toString()) {
+      res.status(401).send("Not authorized");
+      throw new Error("Not authorized");
+    }
     await Project.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.status(200).send("Project Updated Successfully");
   })
@@ -62,7 +69,13 @@ router.put(
 // Delete Project
 router.delete(
   "/:id",
+  authenToken,
   asyncHandler(async (req, res) => {
+    const proj = await Project.findById(req.params.id);
+    if (proj.UserId.toString() !== req.user.toString()) {
+      res.status(401).send("Not authorized");
+      throw new Error("Not authorized");
+    }
     const objectIdConverted = mongoose.Types.ObjectId(req.params.id);
     await RealData.deleteMany({
       Project_id: mongoose.Types.ObjectId(objectIdConverted),
