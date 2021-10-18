@@ -5,6 +5,9 @@ const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const authenToken = require("../middleware/authToken");
+const RealData = require("../models/realData");
+const { Model, modelValidator } = require("../models/model");
+const SyntheticData = require("../models/syntheticData");
 
 // Create a Project
 router.post(
@@ -59,7 +62,17 @@ router.put(
 router.delete(
   "/:id",
   asyncHandler(async (req, res) => {
-    await Project.findOneAndDelete(req.params.id);
+    const objectIdConverted = mongoose.Types.ObjectId(req.params.id);
+    await RealData.deleteMany({
+      Project_id: mongoose.Types.ObjectId(objectIdConverted),
+    });
+    await Model.deleteMany({
+      Project_id: mongoose.Types.ObjectId(objectIdConverted),
+    });
+    await SyntheticData.deleteMany({
+      Project_id: mongoose.Types.ObjectId(objectIdConverted),
+    });
+    await Project.findByIdAndDelete(req.params.id);
     res.status(200).send("Project deleted successfully");
   })
 );

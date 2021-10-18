@@ -69,7 +69,11 @@ router.put(
 router.delete(
   "/:id",
   asyncHandler(async (req, res) => {
-    await Model.findOneAndDelete(req.params.id);
+    const objectIdConverted = mongoose.Types.ObjectId(req.params.id);
+    await SyntheticData.deleteMany({
+      Model_id: mongoose.Types.ObjectId(objectIdConverted),
+    });
+    await Model.findByIdAndDelete(req.params.id);
     res.status(200).send("Model deleted successfully");
   })
 );
