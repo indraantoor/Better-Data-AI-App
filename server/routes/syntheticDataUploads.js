@@ -7,7 +7,10 @@ const uploadsPath = "./uploads/synthetic-data/";
 
 // Gives the upload page for synthetic data
 router.get("/", (req, res) => {
-  res.sendFile(__dirname + "/syntheticDataUpload.html");
+  // res.sendFile(__dirname + "/syntheticDataUpload.html");
+  res.sendFile("syntheticDataUpload.html", {
+    root: "./views/SyntheticDataUpload/",
+  });
 });
 
 // Uploads File

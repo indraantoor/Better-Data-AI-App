@@ -9,7 +9,8 @@ const uploadsPath = "./uploads/real-data/";
 
 // Gives the upload page for real data
 router.get("/", (req, res) => {
-  res.sendFile(__dirname + "/realDataUpload.html");
+  // res.sendFile(__dirname + "/realDataUpload.html");
+  res.sendFile("realDataUpload.html", { root: "./views/RealDataUpload/" });
 });
 
 // TODO: Lower the number of parameters required here (use object)
