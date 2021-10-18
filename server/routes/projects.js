@@ -51,9 +51,10 @@ router.get(
 // Update Project Details
 router.put(
   "/:id",
-  [isValidObjectId, validate(projectValidator)],
+  // [isValidObjectId, validate(projectValidator)],
+  isValidObjectId,
   asyncHandler(async (req, res) => {
-    await Project.findByIdAndUpdate({ _id: req.params.id }, req.body);
+    await Project.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.status(200).send("Project Updated Successfully");
   })
 );
