@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { Project, projectValidator } = require("../models/project");
+const {
+  Project,
+  projectValidator,
+  projectUpdateValidator,
+} = require("../models/project");
 const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
@@ -55,12 +59,10 @@ router.get(
 // Update Project Details
 router.put(
   "/:id",
-  // [isValidObjectId, validate(projectValidator)],
-  // isValidObjectId,
-  authenToken,
+  [isValidObjectId, authenToken, validate(projectUpdateValidator)],
   asyncHandler(async (req, res) => {
     const proj = await Project.findById(req.params.id);
-    if (proj.UserId.toString() !== req.user.toString()) {
+    if (proj.UserId.toString() !== req.user.id.toString()) {
       res.status(401).send("Not authorized");
       throw new Error("Not authorized");
     }
@@ -72,10 +74,10 @@ router.put(
 // Delete Project
 router.delete(
   "/:id",
-  authenToken,
+  [isValidObjectId, authenToken],
   asyncHandler(async (req, res) => {
     const proj = await Project.findById(req.params.id);
-    if (proj.UserId.toString() !== req.user.toString()) {
+    if (proj.UserId.toString() !== req.user.id.toString()) {
       res.status(401).send("Not authorized");
       throw new Error("Not authorized");
     }

@@ -28,4 +28,11 @@ const projectValidator = (data) => {
   return schema.validate(data);
 };
 
-module.exports = { Project, projectValidator };
+const projectUpdateValidator = (data) => {
+  const schema = Joi.object({
+    project_name: Joi.string().required(),
+  });
+  return schema.validate(data);
+};
+
+module.exports = { Project, projectValidator, projectUpdateValidator };

@@ -68,6 +68,7 @@ router.put(
 // Delete User
 router.delete(
   "/:id",
+  isValidObjectId,
   asyncHandler(async (req, res) => {
     // Deletes the user and also all the projects and models associated to it
     const objectIdConverted = mongoose.Types.ObjectId(req.params.id);
