@@ -50,12 +50,15 @@ router.get(
   })
 );
 
+// TODO: UPDATE VALIDATOR FOR PUT REQUEST (USERS)
 // Update User Details
 router.put(
   "/:id",
-  [isValidObjectId, validate(validator)],
+  // [isValidObjectId, validate(validator)],
+  isValidObjectId,
   asyncHandler(async (req, res) => {
-    await User.findByIdAndUpdate({ _id: req.params.id }, req.body);
+    await User.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body });
+    // await User.updateOne({_id: req.params});
     res.status(200).send("User Updated Successfully");
   })
 );
