@@ -12,7 +12,6 @@ const syntheticDataUploads = require("./routes/syntheticDataUploads");
 const realdatas = require("./routes/realdatas");
 const syntheticdatas = require("./routes/syntheticdatas");
 
-// TODO: MAKE MAIN API "....S"
 // TODO: TEST DELETE FUNCTIONALITY AT EVERY LEVEL
 // TODO CODE CLEANUP
 

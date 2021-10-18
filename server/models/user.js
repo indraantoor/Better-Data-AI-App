@@ -27,4 +27,11 @@ const validator = (data) => {
   return schema.validate(data);
 };
 
-module.exports = { User, validator };
+const userUpdateValidator = (data) => {
+  const schema = Joi.object({
+    username: Joi.string().required(),
+  });
+  return schema.validate(data);
+};
+
+module.exports = { User, validator, userUpdateValidator };

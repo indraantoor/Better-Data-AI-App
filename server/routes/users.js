@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { User, validator } = require("../models/user");
+const { User, validator, userUpdateValidator } = require("../models/user");
 const { Project, projectValidator } = require("../models/project");
 const { Model, modelValidator } = require("../models/model");
 const validate = require("../middleware/validate");
@@ -53,12 +53,11 @@ router.get(
   })
 );
 
-// TODO: UPDATE VALIDATOR FOR PUT REQUEST (USERS)
 // Update User Details
 router.put(
   "/:id",
-  // [isValidObjectId, validate(validator)],
-  isValidObjectId,
+  [isValidObjectId, validate(userUpdateValidator)],
+  // isValidObjectId,
   asyncHandler(async (req, res) => {
     await User.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body });
     // await User.updateOne({_id: req.params});
