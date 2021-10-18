@@ -58,9 +58,10 @@ router.get(
 // Update Model Details
 router.put(
   "/:id",
-  [isValidObjectId, validate(modelValidator)],
+  // [isValidObjectId, validate(modelValidator)],
+  isValidObjectId,
   asyncHandler(async (req, res) => {
-    await Model.findByIdAndUpdate({ _id: req.params.id }, req.body);
+    await Model.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.status(200).send("Model Updated Successfully");
   })
 );
