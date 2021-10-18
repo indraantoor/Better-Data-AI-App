@@ -5,6 +5,7 @@ const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const authenToken = require("../middleware/authToken");
+const mongoose = require("mongoose");
 
 // Create a Model
 router.post(
@@ -59,8 +60,14 @@ router.get(
 router.put(
   "/:id",
   // [isValidObjectId, validate(modelValidator)],
-  isValidObjectId,
+  // isValidObjectId,
+  authenToken,
   asyncHandler(async (req, res) => {
+    const mod = await Model.findById(req.params.id);
+    if (mod.User_id.toString() !== req.user.toString()) {
+      res.status(401).send("Not authorized");
+      throw new Error("Not authorized");
+    }
     await Model.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body });
     res.status(200).send("Model Updated Successfully");
   })
@@ -69,7 +76,13 @@ router.put(
 // Delete Model
 router.delete(
   "/:id",
+  authenToken,
   asyncHandler(async (req, res) => {
+    const mod = await Model.findById(req.params.id);
+    if (mod.User_id.toString() !== req.user.toString()) {
+      res.status(401).send("Not authorized");
+      throw new Error("Not authorized");
+    }
     const objectIdConverted = mongoose.Types.ObjectId(req.params.id);
     await SyntheticData.deleteMany({
       Model_id: mongoose.Types.ObjectId(objectIdConverted),
