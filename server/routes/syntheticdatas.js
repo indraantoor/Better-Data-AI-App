@@ -2,21 +2,20 @@ const express = require("express");
 const asyncHandler = require("../middleware/asyncHandler");
 const router = express.Router();
 const {
-  syntheticdata,
+  SyntheticData,
   syntheticDataValidator,
 } = require("../models/syntheticData");
 const authenToken = require("../middleware/authToken");
-
-// TODO: FIX NAMING
+const isValidObjectId = require("../middleware/isValidObjectId");
 
 // Get all csv files
 router.get(
   "/",
   asyncHandler(async (req, res) => {
     const modelId = req.body.Model_id;
-    const syntheticdatas = await syntheticdata
-      .find({ Model_id: modelId })
-      .populate("Model_id");
+    const syntheticdatas = await SyntheticData.find({
+      Model_id: modelId,
+    }).populate("Model_id");
     res.send(syntheticdatas);
   })
 );
@@ -24,9 +23,9 @@ router.get(
 // Get Synthetic Data By Id
 router.get(
   "/:id",
-  // isValidObjectId,
+  isValidObjectId,
   asyncHandler(async (req, res) => {
-    const syntheticData = await syntheticdata.findById(req.params.id);
+    const syntheticData = await SyntheticData.findById(req.params.id);
     res.send(syntheticData);
   })
 );
@@ -34,14 +33,14 @@ router.get(
 // Delete synthetic csv file data by id
 router.delete(
   "/:id",
-  authenToken,
+  [isValidObjectId, authenToken],
   asyncHandler(async (req, res) => {
-    const syntheticData = await syntheticdata.findById(req.params.id);
-    if (syntheticData.User_id.toString() !== req.user.toString()) {
+    const syntheticData = await SyntheticData.findById(req.params.id);
+    if (syntheticData.User_id.toString() !== req.user.id.toString()) {
       res.status(401).send("Not authorized");
       throw new Error("Not authorized");
     }
-    await syntheticdata.findByIdAndDelete(req.params.id);
+    await SyntheticData.findByIdAndDelete(req.params.id);
     res.status(200).json("Synthetic Data deleted successfully");
   })
 );
