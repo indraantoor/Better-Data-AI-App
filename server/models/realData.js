@@ -71,5 +71,12 @@ const realDataValidator = (data) => {
   return schema.validate(data);
 };
 
+const realDataUpdateValidator = (data) => {
+  const schema = Joi.object({
+    filename: Joi.string().required(),
+  });
+  return schema.validate(data);
+};
+
 const RealData = mongoose.model("realData", realDataSchema);
-module.exports = { RealData, realDataValidator };
+module.exports = { RealData, realDataValidator, realDataUpdateValidator };
