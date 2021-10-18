@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-// TODO:  Test Joi Validation
-
 const syntheticDataValuesSchema = mongoose.Schema(
   {
     CLIENTNUM: Number,
