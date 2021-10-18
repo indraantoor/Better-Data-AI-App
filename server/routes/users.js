@@ -8,6 +8,8 @@ const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const RealData = require("../models/realData");
+const SyntheticData = require("../models/syntheticData");
 
 // Create a User
 router.post(
@@ -68,6 +70,12 @@ router.delete(
       UserId: mongoose.Types.ObjectId(objectIdConverted),
     });
     await Model.deleteMany({
+      User_id: mongoose.Types.ObjectId(objectIdConverted),
+    });
+    await RealData.deleteMany({
+      User_id: mongoose.Types.ObjectId(objectIdConverted),
+    });
+    await SyntheticData.deleteMany({
       User_id: mongoose.Types.ObjectId(objectIdConverted),
     });
     await User.findByIdAndDelete(req.params.id);
