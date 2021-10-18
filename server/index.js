@@ -12,9 +12,7 @@ const syntheticDataUploads = require("./routes/syntheticDataUploads");
 const realdatas = require("./routes/realdatas");
 const syntheticdatas = require("./routes/syntheticdatas");
 
-// TODO FIX UPDATE FOR EVERYTHING
 // TODO ADD BASIC AUTHORIZATION (Only when updating and deleting)
-// TODO ADD API TO SEE ALL CSV FILES (BOTH REAL AND SYNTHETIC DATA) (U API FOR IT)
 // TODO FIGURE OUT A WAY TO LINK THESE DOCUMENTS TO USER (USER ID OR ANYTHING) - Potential Solution is middleware
 // TODO: MAKE MAIN API "....S"
 // TODO: TEST DELETE FUNCTIONALITY AT EVERY LEVEL

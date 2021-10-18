@@ -3,6 +3,9 @@ const asyncHandler = require("../middleware/asyncHandler");
 const router = express.Router();
 const realData = require("../models/realData");
 const mongoose = require("mongoose");
+const authenToken = require("../middleware/authToken");
+
+// TODO: FIX NAMING
 
 // Get all csv files
 router.get(
@@ -51,7 +54,13 @@ router.put(
   "/:id",
   // [isValidObjectId, validate(modelValidator)],
   // isValidObjectId,
+  authenToken,
   asyncHandler(async (req, res) => {
+    const realdata = await realData.findById(req.params.id);
+    if (realdata.User_id.toString() !== req.user.toString()) {
+      res.status(401).send("Not authorized");
+      throw new Error("Not authorized");
+    }
     await realData.findByIdAndUpdate(
       { _id: req.params.id },
       { $set: req.body }
@@ -60,10 +69,26 @@ router.put(
   })
 );
 
+// Get Real Data By Id
+router.get(
+  "/:id",
+  // isValidObjectId,
+  asyncHandler(async (req, res) => {
+    const realdata = await realData.findById(req.params.id);
+    res.send(realdata);
+  })
+);
+
 // Delete real csv file data by id
 router.delete(
   "/:id",
+  authenToken,
   asyncHandler(async (req, res) => {
+    const realdata = await realData.findById(req.params.id);
+    if (realdata.User_id.toString() !== req.user.toString()) {
+      res.status(401).send("Not authorized");
+      throw new Error("Not authorized");
+    }
     await realData.findByIdAndDelete(req.params.id);
     res.status(200).json("Real Data deleted successfully");
   })
