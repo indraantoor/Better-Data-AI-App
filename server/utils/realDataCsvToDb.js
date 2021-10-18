@@ -1,13 +1,13 @@
 const csvtojson = require("csvtojson");
-const { realData, realDataValidator } = require("../models/realData");
+const { RealData, realDataValidator } = require("../models/realData");
 
 // Insert into database
 function insertdata(json, params) {
-  const realDataObj = new realData({
+  const realDataObj = new RealData({
     ...params,
     data: json,
   });
-  realData.insertMany(realDataObj, (err, data) => {
+  RealData.insertMany(realDataObj, (err, data) => {
     if (err) {
       console.log(err);
     } else {

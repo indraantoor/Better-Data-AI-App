@@ -1,16 +1,16 @@
 const csvtojson = require("csvtojson");
 const {
-  syntheticData,
+  SyntheticData,
   syntheticDataValidator,
 } = require("../models/syntheticData");
 
 // Insert into database
 function insertdata(json, params) {
-  const syntheticDataObj = new syntheticData({
+  const syntheticDataObj = new SyntheticData({
     ...params,
     data: json,
   });
-  syntheticData.insertMany(syntheticDataObj, (err, data) => {
+  SyntheticData.insertMany(syntheticDataObj, (err, data) => {
     if (err) {
       console.log(err);
     } else {
