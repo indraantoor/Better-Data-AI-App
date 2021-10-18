@@ -8,10 +8,10 @@ const syntheticdata = require("../models/syntheticData");
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const projectId = req.body.Project_id;
+    const modelId = req.body.Model_id;
     const syntheticdatas = await syntheticdata
-      .find({ Project_id: projectId })
-      .populate("Project_id");
+      .find({ Model_id: modelId })
+      .populate("Model_id");
     res.send(syntheticdatas);
   })
 );
