@@ -48,4 +48,12 @@ const modelValidator = (data) => {
   return schema.validate(data);
 };
 
-module.exports = { Model, modelValidator };
+const modelUpdateValidator = (data) => {
+  const schema = Joi.object({
+    model_name: Joi.string().required(),
+    parameters: Joi.object(),
+  });
+  return schema.validate(data);
+};
+
+module.exports = { Model, modelValidator, modelUpdateValidator };

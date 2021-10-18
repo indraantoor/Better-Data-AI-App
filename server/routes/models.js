@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { Model, modelValidator } = require("../models/model");
+const {
+  Model,
+  modelValidator,
+  modelUpdateValidator,
+} = require("../models/model");
 const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
@@ -63,12 +67,10 @@ router.get(
 // Update Model Details
 router.put(
   "/:id",
-  // [isValidObjectId, validate(modelValidator)],
-  // isValidObjectId,
-  authenToken,
+  [isValidObjectId, authenToken, validate(modelUpdateValidator)],
   asyncHandler(async (req, res) => {
     const mod = await Model.findById(req.params.id);
-    if (mod.User_id.toString() !== req.user.toString()) {
+    if (mod.User_id.toString() !== req.user.id.toString()) {
       res.status(401).send("Not authorized");
       throw new Error("Not authorized");
     }
@@ -80,10 +82,10 @@ router.put(
 // Delete Model
 router.delete(
   "/:id",
-  authenToken,
+  [isValidObjectId, authenToken],
   asyncHandler(async (req, res) => {
     const mod = await Model.findById(req.params.id);
-    if (mod.User_id.toString() !== req.user.toString()) {
+    if (mod.User_id.toString() !== req.user.id.toString()) {
       res.status(401).send("Not authorized");
       throw new Error("Not authorized");
     }
