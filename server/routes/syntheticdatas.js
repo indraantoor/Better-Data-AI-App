@@ -16,4 +16,13 @@ router.get(
   })
 );
 
+// Delete synthetic csv file data by id
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    await syntheticdata.findByIdAndDelete(req.params.id);
+    res.status(200).json("Synthetic Data deleted successfully");
+  })
+);
+
 module.exports = router;

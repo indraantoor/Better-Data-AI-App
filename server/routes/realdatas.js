@@ -15,4 +15,13 @@ router.get(
   })
 );
 
+// Delete real csv file data by id
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    await realData.findByIdAndDelete(req.params.id);
+    res.status(200).json("Real Data deleted successfully");
+  })
+);
+
 module.exports = router;
