@@ -1,7 +1,7 @@
 const express = require("express");
 const asyncHandler = require("../middleware/asyncHandler");
 const router = express.Router();
-const realData = require("../models/realData");
+const { realData, realDataValidator } = require("../models/realData");
 const mongoose = require("mongoose");
 const authenToken = require("../middleware/authToken");
 

@@ -1,5 +1,5 @@
 const csvtojson = require("csvtojson");
-const realData = require("../models/realData");
+const { realData, realDataValidator } = require("../models/realData");
 
 // Insert into database
 function insertdata(json, params) {

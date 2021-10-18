@@ -73,4 +73,4 @@ const realDataValidator = (data) => {
 };
 
 const RealData = mongoose.model("realData", realDataSchema);
-module.exports = RealData;
+module.exports = { RealData, realDataValidator };

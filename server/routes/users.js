@@ -8,7 +8,7 @@ const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const RealData = require("../models/realData");
+const { RealData, realDataValidator } = require("../models/realData");
 const SyntheticData = require("../models/syntheticData");
 
 // Create a User
