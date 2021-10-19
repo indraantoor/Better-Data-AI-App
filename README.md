@@ -221,7 +221,7 @@ Route: http://localhost:8080/api/projects/{ObjectId}
 Request: Get
 ```
 
-![Create User Request](/Images/Project/getAproject.png)
+![Create User Request](/Images/Project/getaproject.png)
 
 ### Update Project
 
