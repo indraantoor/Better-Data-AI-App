@@ -25,4 +25,22 @@ const uploadFile = (uploadparameters) => {
   });
 };
 
-module.exports = uploadFile;
+const processAndUpload = (req, res) => {
+  if (req.files) {
+    var file = req.files.file;
+    var filename = file.name;
+    const { userid, projectid, modelid } = req.body;
+    console.log(`Info: Uploading Synthetic Data File: ${filename}`);
+    const uploadparameters = {
+      file: file,
+      filename: filename,
+      userid: userid,
+      projectid: projectid,
+      modelid: modelid,
+    };
+    uploadFile(uploadparameters);
+    res.send("File Uploaded");
+  }
+};
+
+module.exports = { uploadFile, processAndUpload };
