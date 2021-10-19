@@ -1,4 +1,6 @@
 const { Model } = require("../models/model");
+const mongoose = require("mongoose");
+const { SyntheticData } = require("../models/syntheticData");
 
 const createModel = async (req, res) => {
   const userId = req.user.id;

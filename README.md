@@ -360,6 +360,126 @@ Request: Delete
 
 ## Models
 
+### Creating A Model
+
+```sh
+Route: http://localhost:8080/api/models
+Request: Post
+```
+
+Pass in the following info in json
+
+{
+"Project_id": "projectobjectid",
+"model_name": "your model name",
+"parameters": {
+"batch_size": number,
+"training_cycle": number
+}
+}
+
+Database
+![Create User Request](/Images/Model/model1.png)
+
+### Get all models under a project
+
+```sh
+Route: http://localhost:8080/api/models
+Request: Get
+```
+
+Pass info as json:
+{
+"Project_id": "id of project"
+}
+
+### Get a particular model
+
+```sh
+Route: http://localhost:8080/api/models/{objectid}
+Request: Get
+```
+
+### Delete a particular model
+
+It also deletes synthetic data files linked to it.
+
+```sh
+Route: http://localhost:8080/api/models/{objectid}
+Request: Delete
+```
+
+### Update a model
+
+```sh
+Route: http://localhost:8080/api/models/{objectid}
+Request: Delete
+```
+
+Pass in the updated value of the thing you want to update. Using the following keys as reference.
+
+{
+"Project_id": "projectobjectid",
+"model_name": "your model name",
+"parameters": {
+"batch_size": number,
+"training_cycle": number
+}
+}
+
+## Synthetic Data
+
+### Upload Page
+
+```sh
+Route: http://localhost:8080/api/syntheticdata/upload
+```
+
+Goto the upload page and enter the project id, user id and model id.
+
+When front end is implemented they can send these values.
+
+It automatically processes the csv file and saves it to database with row's being items as array of objects.
+
+![Create User Request](/Images/SyntheticData/syn1.png)
+
+![Create User Request](/Images/SyntheticData/syn2.png)
+
+### Get all synthetic data under model
+
+```sh
+Route: http://localhost:8080/api/syntheticdatas
+Request: Get
+```
+
+Pass in the model id in json as:
+
+{
+"Model_id": "id of the model"
+}
+
+### Get a particular synthetic data under model
+
+```sh
+Route: http://localhost:8080/api/syntheticdatas/{objectid}
+Request: Get
+```
+
+### Delete a particular synthetic data under model
+
+```sh
+Route: http://localhost:8080/api/syntheticdatas/{objectid}
+Request: Delete
+```
+
+Database
+
+Before
+![Create User Request](/Images/SyntheticData/syn1.png)
+
+After
+![Create User Request](/Images/SyntheticData/syn3.png)
+
 <!-- CONTACT -->
 
 ## Contact
