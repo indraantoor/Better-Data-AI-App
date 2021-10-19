@@ -22,7 +22,7 @@ const Project = mongoose.model("projects", projectSchema);
 
 const projectValidator = (data) => {
   const schema = Joi.object({
-    UserId: Joi.string().required(),
+    // UserId: Joi.string().required(),
     project_name: Joi.string().required(),
   });
   return schema.validate(data);

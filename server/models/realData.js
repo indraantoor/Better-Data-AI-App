@@ -47,11 +47,11 @@ const realDataSchema = mongoose.Schema(
       ref: "projects",
       required: true,
     },
-    Model_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "models",
-      required: true,
-    },
+    // Model_id: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "models",
+    //   required: true,
+    // },
   },
   {
     timestamps: true,
@@ -63,7 +63,7 @@ const realDataValidator = (data) => {
     filename: Joi.string().required(),
     User_id: Joi.string().required(),
     Project_id: Joi.string().required(),
-    Model_id: Joi.string().required(),
+    // Model_id: Joi.string().required(),
     data: Joi.array().required(),
   });
   return schema.validate(data);
