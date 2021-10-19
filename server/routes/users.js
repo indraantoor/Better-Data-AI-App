@@ -24,8 +24,8 @@ router.post(
 // Get the user by email id
 router.get(
   "/",
-  asyncHandler((req, res) => {
-    getUserToken(req, res);
+  asyncHandler(async (req, res) => {
+    await getUserToken(req, res);
   })
 );
 
