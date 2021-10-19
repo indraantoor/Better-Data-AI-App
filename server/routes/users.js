@@ -13,33 +13,28 @@ const {
   SyntheticData,
   syntheticDataValidator,
 } = require("../models/syntheticData");
+const {
+  createUser,
+  getUserToken,
+  getParticularUser,
+  update,
+  deleteUser,
+} = require("../controllers/usersController");
 
 // Create a User
 router.post(
   "/",
   validate(validator),
-  asyncHandler(async (req, res) => {
-    // const accessToken = jwt.sign(user, process.env.JWT_SECRET);
-    await User(req.body).save();
-    res
-      .status(200)
-      // .json({ accessToken: accessToken })
-      .send("User was created successfully.");
+  asyncHandler((req, res) => {
+    createUser(req, res);
   })
 );
 
 // Get the user by email id
 router.get(
   "/",
-  asyncHandler(async (req, res) => {
-    const { email } = req.body;
-    // const users = await User.find();
-    const users = await User.findOne({ email });
-    const id = users._id;
-    const accessToken = jwt.sign({ id }, process.env.JWT_SECRET);
-    // res.send(users);
-    res.status(200).json({ accessToken: accessToken });
-    // res.send(id);
+  asyncHandler((req, res) => {
+    getUserToken(req, res);
   })
 );
 
@@ -47,9 +42,8 @@ router.get(
 router.get(
   "/:id",
   isValidObjectId,
-  asyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
-    res.send(user);
+  asyncHandler((req, res) => {
+    getParticularUser(req, res);
   })
 );
 
@@ -57,35 +51,18 @@ router.get(
 router.put(
   "/:id",
   [isValidObjectId, validate(userUpdateValidator)],
-  // isValidObjectId,
-  asyncHandler(async (req, res) => {
-    await User.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body });
-    // await User.updateOne({_id: req.params});
-    res.status(200).send("User Updated Successfully");
+  asyncHandler((req, res) => {
+    update(req, res);
   })
 );
 
 // Delete User
+// And also all the projects, models and csv data associated to it
 router.delete(
   "/:id",
   isValidObjectId,
-  asyncHandler(async (req, res) => {
-    // Deletes the user and also all the projects and models associated to it
-    const objectIdConverted = mongoose.Types.ObjectId(req.params.id);
-    await Project.deleteMany({
-      UserId: mongoose.Types.ObjectId(objectIdConverted),
-    });
-    await Model.deleteMany({
-      User_id: mongoose.Types.ObjectId(objectIdConverted),
-    });
-    await RealData.deleteMany({
-      User_id: mongoose.Types.ObjectId(objectIdConverted),
-    });
-    await SyntheticData.deleteMany({
-      User_id: mongoose.Types.ObjectId(objectIdConverted),
-    });
-    await User.findByIdAndDelete(req.params.id);
-    res.status(200).json("User deleted successfully");
+  asyncHandler((req, res) => {
+    deleteUser(req, res);
   })
 );
 

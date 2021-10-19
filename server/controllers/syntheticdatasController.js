@@ -16,7 +16,7 @@ const getParticularSyntheticData = async (req, res) => {
   res.send(syntheticData);
 };
 
-const deleteSyntheticDataCsv = (req, res) => {
+const deleteSyntheticDataCsv = async (req, res) => {
   const syntheticData = await SyntheticData.findById(req.params.id);
   if (syntheticData.User_id.toString() !== req.user.id.toString()) {
     res.status(401).send("Not authorized");
