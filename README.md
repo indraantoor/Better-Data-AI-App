@@ -239,7 +239,7 @@ Else you get unauthorized as response.
 ![Create User Request](/Images/Project/projectupdaterequest.png)
 
 Before
-![Create User Request](/Images/Project/getAproject.png)
+![Create User Request](/Images/Project/getaproject.png)
 
 After
 ![Create User Request](/Images/Project/updatedproject.png)
