@@ -15,8 +15,8 @@ const {
 // Get all csv files
 router.get(
   "/",
-  asyncHandler((req, res) => {
-    getAllRealDatasByProject(req, res);
+  asyncHandler(async (req, res) => {
+    await getAllRealDatasByProject(req, res);
   })
 );
 
@@ -24,8 +24,8 @@ router.get(
 router.put(
   "/:id",
   [isValidObjectId, authenToken, validate(realDataUpdateValidator)],
-  asyncHandler((req, res) => {
-    update(req, res);
+  asyncHandler(async (req, res) => {
+    await update(req, res);
   })
 );
 
@@ -33,8 +33,8 @@ router.put(
 router.get(
   "/:id",
   isValidObjectId,
-  asyncHandler((req, res) => {
-    getParticularRealData(req, res);
+  asyncHandler(async (req, res) => {
+    await getParticularRealData(req, res);
   })
 );
 
@@ -42,8 +42,8 @@ router.get(
 router.delete(
   "/:id",
   [isValidObjectId, authenToken],
-  asyncHandler((req, res) => {
-    deleteRealDataCsv(req, res);
+  asyncHandler(async (req, res) => {
+    await deleteRealDataCsv(req, res);
   })
 );
 

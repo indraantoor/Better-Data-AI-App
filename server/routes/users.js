@@ -16,8 +16,8 @@ const {
 router.post(
   "/",
   validate(validator),
-  asyncHandler((req, res) => {
-    createUser(req, res);
+  asyncHandler(async (req, res) => {
+    await createUser(req, res);
   })
 );
 
@@ -33,8 +33,8 @@ router.get(
 router.get(
   "/:id",
   isValidObjectId,
-  asyncHandler((req, res) => {
-    getParticularUser(req, res);
+  asyncHandler(async (req, res) => {
+    await getParticularUser(req, res);
   })
 );
 
@@ -42,8 +42,8 @@ router.get(
 router.put(
   "/:id",
   [isValidObjectId, validate(userUpdateValidator)],
-  asyncHandler((req, res) => {
-    update(req, res);
+  asyncHandler(async (req, res) => {
+    await update(req, res);
   })
 );
 
@@ -52,8 +52,8 @@ router.put(
 router.delete(
   "/:id",
   isValidObjectId,
-  asyncHandler((req, res) => {
-    deleteUser(req, res);
+  asyncHandler(async (req, res) => {
+    await deleteUser(req, res);
   })
 );
 

@@ -12,8 +12,8 @@ const {
 // Get all csv files
 router.get(
   "/",
-  asyncHandler((req, res) => {
-    getAllSyntheticData(req, res);
+  asyncHandler(async (req, res) => {
+    await getAllSyntheticData(req, res);
   })
 );
 
@@ -21,8 +21,8 @@ router.get(
 router.get(
   "/:id",
   isValidObjectId,
-  asyncHandler((req, res) => {
-    getParticularSyntheticData(req, res);
+  asyncHandler(async (req, res) => {
+    await getParticularSyntheticData(req, res);
   })
 );
 
@@ -30,8 +30,8 @@ router.get(
 router.delete(
   "/:id",
   [isValidObjectId, authenToken],
-  asyncHandler((req, res) => {
-    deleteSyntheticDataCsv(req, res);
+  asyncHandler(async (req, res) => {
+    await deleteSyntheticDataCsv(req, res);
   })
 );
 

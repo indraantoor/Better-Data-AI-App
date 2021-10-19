@@ -17,8 +17,8 @@ const {
 router.post(
   "/",
   [authenToken, validate(modelValidator)],
-  asyncHandler((req, res) => {
-    createModel(req, res);
+  asyncHandler(async (req, res) => {
+    await createModel(req, res);
   })
 );
 
@@ -26,8 +26,8 @@ router.post(
 router.get(
   "/",
   authenToken,
-  asyncHandler((req, res) => {
-    getAllModelsByProject(req, res);
+  asyncHandler(async (req, res) => {
+    await getAllModelsByProject(req, res);
   })
 );
 
@@ -35,8 +35,8 @@ router.get(
 router.get(
   "/:id",
   isValidObjectId,
-  asyncHandler((req, res) => {
-    getParticularModel(req, res);
+  asyncHandler(async (req, res) => {
+    await getParticularModel(req, res);
   })
 );
 
@@ -45,7 +45,7 @@ router.put(
   "/:id",
   [isValidObjectId, authenToken, validate(modelUpdateValidator)],
   asyncHandler(async (req, res) => {
-    updateModel(req, res);
+    await updateModel(req, res);
   })
 );
 
@@ -53,8 +53,8 @@ router.put(
 router.delete(
   "/:id",
   [isValidObjectId, authenToken],
-  asyncHandler((req, res) => {
-    deleteModel(req, res);
+  asyncHandler(async (req, res) => {
+    await deleteModel(req, res);
   })
 );
 

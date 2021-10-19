@@ -20,8 +20,8 @@ const {
 router.post(
   "/",
   [authenToken, validate(projectValidator)],
-  asyncHandler((req, res) => {
-    createProject(req, res);
+  asyncHandler(async (req, res) => {
+    await createProject(req, res);
   })
 );
 
@@ -29,8 +29,8 @@ router.post(
 router.get(
   "/",
   authenToken,
-  asyncHandler((req, res) => {
-    getAllProjectsByUser(req, res);
+  asyncHandler(async (req, res) => {
+    await getAllProjectsByUser(req, res);
   })
 );
 
@@ -38,8 +38,8 @@ router.get(
 router.get(
   "/:id",
   isValidObjectId,
-  asyncHandler((req, res) => {
-    getParticularProject(req, res);
+  asyncHandler(async (req, res) => {
+    await getParticularProject(req, res);
   })
 );
 
@@ -47,8 +47,8 @@ router.get(
 router.put(
   "/:id",
   [isValidObjectId, authenToken, validate(projectUpdateValidator)],
-  asyncHandler((req, res) => {
-    updateProject(req, res);
+  asyncHandler(async (req, res) => {
+    await updateProject(req, res);
   })
 );
 
@@ -56,8 +56,8 @@ router.put(
 router.delete(
   "/:id",
   [isValidObjectId, authenToken],
-  asyncHandler((req, res) => {
-    deleteProject(req, res);
+  asyncHandler(async (req, res) => {
+    await deleteProject(req, res);
   })
 );
 
