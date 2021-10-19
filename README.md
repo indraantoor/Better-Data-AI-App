@@ -89,6 +89,13 @@ Go to the server directory and start the server:
 npm start
 ```
 
+Make a .env file in server directory and add
+
+```sh
+Db = mongodbconnection url
+JWT_SECRET = yoursecret
+```
+
 Everything is linked to a jwt token which is generated on the object id of the user.
 
 In future it can be used to implement authentication and authorization feature.
