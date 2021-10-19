@@ -7,16 +7,17 @@ const {
 } = require("../models/syntheticData");
 const authenToken = require("../middleware/authToken");
 const isValidObjectId = require("../middleware/isValidObjectId");
+const {
+  getAllSyntheticData,
+  getParticularSyntheticData,
+  deleteSyntheticDataCsv,
+} = require("../controllers/syntheticdatasController");
 
 // Get all csv files
 router.get(
   "/",
-  asyncHandler(async (req, res) => {
-    const modelId = req.body.Model_id;
-    const syntheticdatas = await SyntheticData.find({
-      Model_id: modelId,
-    }).populate("Model_id");
-    res.send(syntheticdatas);
+  asyncHandler((req, res) => {
+    getAllSyntheticData(req, res);
   })
 );
 
@@ -24,9 +25,8 @@ router.get(
 router.get(
   "/:id",
   isValidObjectId,
-  asyncHandler(async (req, res) => {
-    const syntheticData = await SyntheticData.findById(req.params.id);
-    res.send(syntheticData);
+  asyncHandler((req, res) => {
+    getParticularSyntheticData(req, res);
   })
 );
 
@@ -34,14 +34,8 @@ router.get(
 router.delete(
   "/:id",
   [isValidObjectId, authenToken],
-  asyncHandler(async (req, res) => {
-    const syntheticData = await SyntheticData.findById(req.params.id);
-    if (syntheticData.User_id.toString() !== req.user.id.toString()) {
-      res.status(401).send("Not authorized");
-      throw new Error("Not authorized");
-    }
-    await SyntheticData.findByIdAndDelete(req.params.id);
-    res.status(200).json("Synthetic Data deleted successfully");
+  asyncHandler((req, res) => {
+    deleteSyntheticDataCsv(req, res);
   })
 );
 
