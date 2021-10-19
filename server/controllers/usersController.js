@@ -1,13 +1,10 @@
-const { User, validator, userUpdateValidator } = require("../models/user");
+const { User } = require("../models/user");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const { Project, projectValidator } = require("../models/project");
-const { Model, modelValidator } = require("../models/model");
-const { RealData, realDataValidator } = require("../models/realData");
-const {
-  SyntheticData,
-  syntheticDataValidator,
-} = require("../models/syntheticData");
+const { Project } = require("../models/project");
+const { Model } = require("../models/model");
+const { RealData } = require("../models/realData");
+const { SyntheticData } = require("../models/syntheticData");
 
 const createUser = async (req, res) => {
   // const accessToken = jwt.sign(user, process.env.JWT_SECRET);

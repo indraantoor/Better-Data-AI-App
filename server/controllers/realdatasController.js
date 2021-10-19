@@ -1,8 +1,4 @@
-const {
-  RealData,
-  realDataValidator,
-  realDataUpdateValidator,
-} = require("../models/realData");
+const { RealData } = require("../models/realData");
 
 const getParticularRealData = async (req, res) => {
   const realdata = await RealData.findById(req.params.id);

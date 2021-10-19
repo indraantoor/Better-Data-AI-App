@@ -1,19 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const {
-  Model,
-  modelValidator,
-  modelUpdateValidator,
-} = require("../models/model");
+const { modelValidator, modelUpdateValidator } = require("../models/model");
 const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const authenToken = require("../middleware/authToken");
-const {
-  SyntheticData,
-  syntheticDataValidator,
-} = require("../models/syntheticData");
-const mongoose = require("mongoose");
 const {
   createModel,
   getAllModelsByProject,

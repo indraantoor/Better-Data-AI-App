@@ -12,9 +12,6 @@ const syntheticDataUploads = require("./routes/syntheticDataUploads");
 const realdatas = require("./routes/realdatas");
 const syntheticdatas = require("./routes/syntheticdatas");
 
-// TODO: TEST DELETE FUNCTIONALITY AT EVERY LEVEL
-// TODO CODE CLEANUP
-
 // Database Connection
 connection();
 

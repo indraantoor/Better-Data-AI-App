@@ -25,6 +25,7 @@ const uploadFile = (uploadparameters) => {
   });
 };
 
+// Adds additional information to the mongodb object and then passes it to upload's the file
 const processAndUpload = (req, res) => {
   if (req.files) {
     var file = req.files.file;

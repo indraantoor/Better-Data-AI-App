@@ -1,7 +1,4 @@
-const {
-  SyntheticData,
-  syntheticDataValidator,
-} = require("../models/syntheticData");
+const { SyntheticData } = require("../models/syntheticData");
 
 const getAllSyntheticData = async (req, res) => {
   const modelId = req.body.Model_id;

@@ -1,12 +1,8 @@
-const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const { Project, projectValidator } = require("../models/project");
-const { RealData, realDataValidator } = require("../models/realData");
-const { Model, modelValidator } = require("../models/model");
-const {
-  SyntheticData,
-  syntheticDataValidator,
-} = require("../models/syntheticData");
+const { Project } = require("../models/project");
+const { RealData } = require("../models/realData");
+const { Model } = require("../models/model");
+const { SyntheticData } = require("../models/syntheticData");
 
 const createProject = async (req, res) => {
   const userid = req.user.id;
@@ -19,6 +15,7 @@ const createProject = async (req, res) => {
   res.status(200).json(createdProject);
 };
 
+// Get all projects made by a user
 const getAllProjectsByUser = async (req, res) => {
   const userid = req.user.id;
   const projects = await Project.find({ UserId: userid }).populate("UserId");

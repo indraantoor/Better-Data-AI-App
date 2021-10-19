@@ -1,10 +1,6 @@
 const express = require("express");
 const asyncHandler = require("../middleware/asyncHandler");
 const router = express.Router();
-const {
-  SyntheticData,
-  syntheticDataValidator,
-} = require("../models/syntheticData");
 const authenToken = require("../middleware/authToken");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const {
@@ -21,7 +17,7 @@ router.get(
   })
 );
 
-// Get Synthetic Data By Id
+// Get synthetic data by Id
 router.get(
   "/:id",
   isValidObjectId,
@@ -30,7 +26,7 @@ router.get(
   })
 );
 
-// Delete synthetic csv file data by id
+// Delete synthetic csv file data by Id
 router.delete(
   "/:id",
   [isValidObjectId, authenToken],

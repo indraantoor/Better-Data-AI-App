@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const syntheticDataCsvToDb = require("../utils/syntheticDataCsvToDb");
 const {
   processAndUpload,
 } = require("../controllers/syntheticDataUploadsController");
@@ -12,7 +11,7 @@ router.get("/", (req, res) => {
   });
 });
 
-// Handles upload of real data
+// Upload synthetic data
 router.post("/", (req, res) => {
   processAndUpload(req, res);
 });

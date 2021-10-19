@@ -1,8 +1,4 @@
-const {
-  Model,
-  modelValidator,
-  modelUpdateValidator,
-} = require("../models/model");
+const { Model } = require("../models/model");
 
 const createModel = async (req, res) => {
   const userId = req.user.id;
@@ -25,6 +21,7 @@ const createModel = async (req, res) => {
   // res.status(200).send("Model was created successfully.");
 };
 
+// Gives all models under a particular project
 const getAllModelsByProject = async (req, res) => {
   const projectId = req.body.Project_id;
   const models = await Model.find({ Project_id: projectId }).populate(

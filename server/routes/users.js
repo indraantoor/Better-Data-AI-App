@@ -1,18 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { User, validator, userUpdateValidator } = require("../models/user");
-const { Project, projectValidator } = require("../models/project");
-const { Model, modelValidator } = require("../models/model");
+const { validator, userUpdateValidator } = require("../models/user");
 const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
-const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose");
-const { RealData, realDataValidator } = require("../models/realData");
-const {
-  SyntheticData,
-  syntheticDataValidator,
-} = require("../models/syntheticData");
 const {
   createUser,
   getUserToken,

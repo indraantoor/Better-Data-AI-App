@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const {
-  Project,
   projectValidator,
   projectUpdateValidator,
 } = require("../models/project");
@@ -9,13 +8,6 @@ const validate = require("../middleware/validate");
 const isValidObjectId = require("../middleware/isValidObjectId");
 const asyncHandler = require("../middleware/asyncHandler");
 const authenToken = require("../middleware/authToken");
-const { RealData, realDataValidator } = require("../models/realData");
-const { Model, modelValidator } = require("../models/model");
-const {
-  SyntheticData,
-  syntheticDataValidator,
-} = require("../models/syntheticData");
-const mongoose = require("mongoose");
 const {
   createProject,
   getAllProjectsByUser,
